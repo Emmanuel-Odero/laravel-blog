@@ -24,7 +24,7 @@ Route::get('/posts/{post}', function($slug){
         // dd('File not found');
     }
     $post=cache()->remember("posts.{$slug}", 5,function() use($path){
-        var_dump('file_get_contents');
+        //var_dump('file_get_contents');
         return file_get_contents($path);
     });
     // $post= file_get_contents($path);
