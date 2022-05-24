@@ -8,7 +8,13 @@
     <title>My Blog</title>
 </head>
 <body>
-    <article>
+    <?php foreach ($posts as $post): ?>
+        <article>
+            <a href="/posts/first-post"><h1>My First Post</h1></a>
+            <?= $post; ?>
+        </article>
+    <?php endforeach; ?>
+    <!-- <article>
         <a href="/posts/first-post"><h1>My First Post</h1></a>
         <p>
             Money
@@ -41,6 +47,6 @@
             also works in Sierra Leone. And the same goes for educational achievements, 
             professional credentials, and medical records.
         </p>
-    </article>
+    </article> -->
 </body>
 </html>
