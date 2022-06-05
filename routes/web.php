@@ -1,6 +1,7 @@
 <?php
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use League\CommonMark\Extension\FrontMatter\Data\LibYamlFrontMatterParser;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
-    dd($post[2]->get_contents());
-    return view('posts',[
-    'posts'=>Post::all()
-    ]);
+    $document = YamlFrontMatter::parseFile($path)(
+    resource_path('posts/my-fourth-post.html')
+    );
+    // $posts = Post::all();
+    // ddd($posts);
+    // $posts = Post::all();
+    // dd($post[2]->get_contents());
+    // return view('posts',[
+    // 'posts'=>Post::all()
+    // ]);
 });
 Route::get('/posts/{post}', function($slug){
     return view('post',[
