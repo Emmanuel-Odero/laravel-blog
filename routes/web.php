@@ -1,7 +1,7 @@
 <?php
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-use League\CommonMark\Extension\FrontMatter\Data\LibYamlFrontMatterParser;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,20 @@ use League\CommonMark\Extension\FrontMatter\Data\LibYamlFrontMatterParser;
 */
 
 Route::get('/', function () {
-    $document = YamlFrontMatter::parseFile($path)(
-    resource_path('posts/my-fourth-post.html')
-    );
+    $files = File::files(resource_path("posts"));
+    $posts = [];
+    foreach($files as $file){
+        $document[] = YamlFrontMatter::parseFile($file);
+
+        $posts[] = new Post(
+            $document->title,
+            $document->excerpt,
+            $document->date,
+            $document->body()
+        );
+    }
+    ddd($posts);
+    // return view('posts', ['posts'=>$document])
     // $posts = Post::all();
     // ddd($posts);
     // $posts = Post::all();
